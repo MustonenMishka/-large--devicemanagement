@@ -1,0 +1,73 @@
+<%- include('partials/header') %>
+
+<a class="btn btn-outline-dark btn-lg m-2" href="/devices" role="button">Назад</a>
+
+<div class="container">
+    <div class="jumbotron text-center my-0 py-3">
+        <i class="fa fa-sliders fa-6x"></i>
+        <h1 class="display-4 mb-3">Будет отредактирован тип устройтв <%= type.name %></h1>
+        <h4>Отредактируйте свойства типа и их возможные опции</h4>
+    </div>
+
+    <form action="/add-type" method="POST" id="add-type-form">
+
+        <ul id="propsList"><% type.props.forEach((prop, propIdx) => { %><li class="card">
+                    <h5 class="card-header">Свойство <%= propIdx + 1 %></h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 mx-auto">
+                                <label for="prop-<%= propIdx + 1 %>">Название свойства</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text"><i class="fa fa-cogs"></i></div>
+                                    </div>
+                                    <input type="text" required name="prop-<%= propIdx + 1 %>" class="form-control"
+                                           value="<%= prop.propname %>"
+                                           id="prop-<%= propIdx + 1 %>">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Список возможный опций:</label>
+                                <ul id="optList-<%= propIdx + 1 %>"><% prop.options.forEach((opt, optIdx) => { %><li class="input-group input-group-sm mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"
+                                                      id="prop-<%= propIdx + 1 %>-opt-<%= optIdx + 1 %>"><%= optIdx + 1 %></span>
+                                            </div>
+                                            <input type="text" name="prop-<%= propIdx + 1 %>-opt-<%= optIdx + 1 %>"
+                                                   class="form-control"
+                                                   aria-label="Small" value="<%= opt %>" required
+                                                   aria-describedby="prop-<%= propIdx + 1 %>-opt-<%= optIdx + 1 %>">
+                                        </li><% }) %></ul>
+                                <button type="button" class="float-left btn btn-dark btn-sm"
+                                        id="addMoreOpt-<%= propIdx + 1 %>"><i
+                                            class="fa fa-plus"></i></button>
+                                <button type="button" class="float-right btn btn-danger btn-sm"
+                                        id="deleteOpt-<%= propIdx + 1 %>"><i
+                                            class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </li><% }) %></ul>
+
+        <div class="row mb-5">
+            <div class="col-md-6 text-center mt-2">
+                <button type="button" class="btn btn-dark btn-lg" id="addMoreProps">Прикрепить свойство</button>
+            </div>
+            <div class="col-md-6 text-center mt-2">
+                <button type="button" class="btn btn-danger btn-lg" id="deleteProp">Удалить свойство</button>
+            </div>
+        </div>
+
+        <input type="hidden" value="<%= type.name %>" name="typeName">
+        <input type="hidden" value="true" name="isEditing">
+
+        <div class="row mb-5">
+            <button type="submit" class="btn btn-dark btn-lg">Редактировать тип</button>
+        </div>
+
+    </form>
+</div>
+
+
+<script src="/static/scripts/edit-type.js" defer></script>
+<%- include('partials/footer') %>

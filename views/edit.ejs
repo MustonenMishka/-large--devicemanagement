@@ -1,0 +1,117 @@
+<%- include('partials/header') %>
+
+<a class="btn btn-outline-dark btn-lg m-2" href="/devices" role="button">Назад</a>
+<div class="container">
+<div class="jumbotron text-center">
+        <i class="fas fa-edit fa-6x"></i>
+        <h1 class="display-4">Следующие устройства <%= deviceArr.length > 1 ? deviceArr[0].station : null %> будут отредактированы:</h1>
+        <hr>
+        <table class="table table-bordered mt-5">
+
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col" class="align-middle">Серийный №</th>
+                <th scope="col" class="align-middle">Дата</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <% deviceArr.forEach((device) => { %>
+            <tr class="text-center">
+                <td scope="row" class="align-middle"><%= device.serial %></td>
+                <td class="align-middle"><%= device.year %>-<%= device.month %></td>
+            </tr>
+            <% }) %>
+            </tbody>
+
+        </table>
+    </div>
+
+    <form action="/edit" method="POST" id="edit-device-form">
+
+        <div class="form-row">
+            <div class="col-md-4">
+                <label for="person">ФИО ответственного</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-user"></i></div>
+                    </div>
+                    <input type="text" required name="person" class="form-control" id="person" value="<%= deviceArr[0].person %>">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="phone">Телефон ответственного</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-phone"></i></div>
+                    </div>
+                    <input type="tel" required name="phone" class="form-control" id="phone" value="<%= deviceArr[0].phone %>">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="email">E-mail ответственного</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-envelope"></i></div>
+                    </div>
+                    <input type="email" required name="email" class="form-control" id="email" value="<%= deviceArr[0].email %>">
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-4">
+                <label for="person2">ФИО доп. ответственного</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-user"></i></div>
+                    </div>
+                    <input type="text" required name="person2" class="form-control" id="person2" value="<%= deviceArr[0].person2 %>">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="phone2">Телефон доп. ответственного</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-phone"></i></div>
+                    </div>
+                    <input type="tel" name="phone2" class="form-control" id="phone2" value="<%= deviceArr[0].phone2 %>">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="email2">E-mail доп. ответственного</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-envelope"></i></div>
+                    </div>
+                    <input type="email" name="email2" class="form-control" id="email2" value="<%= deviceArr[0].email2 %>">
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                <label for="comment">Комментарий:</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-comment"></i></div>
+                    </div>
+                    <textarea class="form-control" rows="3" name="comment" id="comment"><%= deviceArr[0].comment %></textarea>
+                </div>
+            </div>
+        </div>
+
+        <% if (isStation) { %>
+            <input type="hidden" id="station" name="station" value="<%= deviceArr[0].station %>">
+            <input type="hidden" id="company" name="company" value="<%= deviceArr[0].company %>">
+        <% } else { %>
+            <input type="hidden" id="serial" name="serial" value="<%= deviceArr[0].serial %>">
+        <% } %>
+
+        <div class="row mb-5">
+                <button type="submit" class="btn btn-dark btn-lg m-2">Отредактировать</button>
+        </div>
+
+    </form>
+</div>
+
+
+<%- include('partials/footer') %>

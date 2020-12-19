@@ -1,0 +1,33 @@
+<%- include('partials/header') %>
+
+
+<div class="jumbotron centered">
+  <div class="container">
+    <i class="fas fa-check fa-6x"></i>
+    <h1 class="display-4">Следующие устройства успешно добавлены:</h1>
+    <hr>
+    <table class="table table-bordered mt-5">
+
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col" class="align-middle">Серийный №</th>
+        <th scope="col" class="align-middle">Ключ</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% devices.forEach((device) => { %>
+        <tr>
+          <td scope="row" class="align-middle"><%= device.serial %></td>
+          <td class="align-middle"><%= device.hash %></td>
+        </tr>
+      <% }) %>
+      </tbody>
+
+    </table>
+
+    <a class="btn btn-light btn-lg" href="/devices" role="button">Вернуться в личный кабинет</a>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

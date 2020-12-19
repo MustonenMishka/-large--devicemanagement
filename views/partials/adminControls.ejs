@@ -1,0 +1,105 @@
+<div class="btn-group">
+    <button class="btn btn-dark btn-lg dropdown-toggle dropdown-toggle mx-1 my-1" type="button"
+            id="dropdownMenuButton--DB" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+        Скачать копию БД
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton--DB">
+        <a class="dropdown-item" href="/download/devices">Устройства</a>
+        <a class="dropdown-item" href="/download/users">Пользователи</a>
+        <a class="dropdown-item" href="/download/types">Типы</a>
+    </div>
+</div>
+
+<div class="btn-group">
+    <button class="btn btn-dark btn-lg dropdown-toggle dropdown-toggle mx-1 my-1" type="button"
+            id="dropdownMenuButton--Users" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false" aria-controls="collapse-delete-user">
+        Пользователи
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton--Users">
+        <a class="dropdown-item" href="/register" role="button">Создать пользователя</a>
+        <a class="dropdown-item" data-toggle="collapse" href="#collapse-delete-user" role="button"
+           aria-expanded="false" aria-controls="collapse-delete-user">Удалить пользователя</a>
+    </div>
+</div>
+
+<div class="btn-group">
+    <button class="btn btn-dark btn-lg dropdown-toggle dropdown-toggle mx-1 my-1" type="button"
+            id="dropdownMenuButton--Types" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false" aria-controls="collapse-add-type">
+        Типы устройств
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton--Types">
+        <a class="dropdown-item" href="/add-type" role="button">Добавить тип устройств</a>
+        <a class="dropdown-item" data-toggle="collapse" href="#collapse-edit-type" role="button"
+           aria-expanded="false" aria-controls="collapse-edit-type">Редактировать тип устройств</a>
+        <a class="dropdown-item" data-toggle="collapse" href="#collapse-delete-type" role="button"
+           aria-expanded="false" aria-controls="collapse-delete-type">Удалить тип устройств</a>
+    </div>
+</div>
+
+<div class="btn-group">
+    <button class="btn btn-dark btn-lg dropdown-toggle dropdown-toggle mx-1 my-1" type="button"
+            id="dropdownMenuButton--Device" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+        Добавить устройство
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton--Device">
+        <a class="dropdown-item" href="/submit">К новому объекту</a>
+        <a class="dropdown-item" data-toggle="collapse" href="#collapse-addToStation" role="button"
+           aria-expanded="false" aria-controls="collapse-addToStation">К существующему объекту</a>
+    </div>
+</div>
+
+<div class="collapse" id="collapse-addToStation">
+    <div class="card card-body">
+        <form action="/add-to-station" method="POST" class="form-inline my-2 mx-auto">
+            <input class="form-control mr-sm-2" type="text" name="station" placeholder="Объект"
+                   id="station-suggest">
+            <select class="custom-select mr-sm-2" id="company-suggest" name="company"></select>
+            <button class="btn btn-outline-success my-2" type="submit">Добавить</button>
+            <a class="btn btn-danger mx-2" type='button' data-toggle="collapse" href="#collapse-addToStation"
+               role="button" aria-expanded="false" aria-controls="collapse-addToStation">Отмена</a>
+        </form>
+    </div>
+</div>
+
+<div class="collapse" id="collapse-delete-user">
+    <div class="card card-body mt-2">
+        Вы действительно хотите удалить пользователя?
+        <form action="/delete-user" method="POST" class="form-inline my-2 mx-auto">
+            <input class="form-control mr-sm-2" type="text" required name="userDel" placeholder="Логин"
+                   id="username-del">
+            <button class="btn btn-outline-danger my-2" type="submit">Удалить</button>
+            <a class="btn btn-danger mx-2" data-toggle="collapse" href="#collapse-delete-user"
+               role="button" aria-expanded="false" aria-controls="collapse-delete-user">Отмена</a>
+        </form>
+    </div>
+</div>
+
+<div class="collapse" id="collapse-edit-type">
+    <div class="card card-body mt-2">
+        Какой тип устройств требуется отредактировать?
+        <form action="/edit-type" method="GET" class="form-inline my-2 mx-auto">
+            <input class="form-control mr-sm-2" type="text" required name="typeName" placeholder="Laurel"
+                   id="type-edit">
+            <button class="btn btn-outline-success my-2" type="submit">Редактировать</button>
+            <a class="btn btn-danger mx-2" data-toggle="collapse" href="#collapse-edit-type"
+               role="button" aria-expanded="false" aria-controls="collapse-edit-type">Отмена</a>
+        </form>
+    </div>
+</div>
+
+<div class="collapse" id="collapse-delete-type">
+    <div class="card card-body mt-2">
+        Вы действительно хотите удалить тип устройств?
+        <form action="/delete-type" method="POST" class="form-inline my-2 mx-auto">
+            <input class="form-control mr-sm-2" type="text" required name="typeName" placeholder="Laurel"
+                   id="type-del">
+            <button class="btn btn-outline-danger my-2" type="submit">Удалить</button>
+            <a class="btn btn-danger mx-2" data-toggle="collapse" href="#collapse-delete-type"
+               role="button" aria-expanded="false" aria-controls="collapse-delete-type">Отмена</a>
+        </form>
+    </div>
+</div>

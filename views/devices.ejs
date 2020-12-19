@@ -1,0 +1,140 @@
+<%- include('partials/header') %>
+
+<link href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css" rel="stylesheet">
+<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.17.1/locale/bootstrap-table-ru-RU.min.js"></script>
+
+<p class="m-4 float-right">Добро пожаловать, <%= greet %></p>
+<div class="row">
+    <a class="btn btn-outline-dark btn-lg m-2" href="/logout" role="button">Выйти из аккаунта</a>
+    <a class="btn btn-outline-dark btn-lg m-2" href="/" role="button">На главную</a>
+</div>
+<div class="jumbotron text-center py-0 mb-0 mt-3">
+
+        <% if (admin) { %>
+            <i class="fas fa-user-plus fa-6x"></i>
+            <h1 class="display-4 mb-4">Добавьте устройство, базу или пользователя</h1>
+            <hr>
+
+            <%- include('partials/adminControls') %>
+
+        <% } else { %>
+            <i class="fas fa-network-wired fa-6x"></i>
+            <h1 class="display-4">Список устройств</h1>
+            <hr>
+
+            <%- include('partials/basicControls') %>
+        <% } %>
+
+        <hr>
+<div class="row">
+    <div class="btn-group dropright float-left">
+        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Выбор базы
+        </button>
+        <div class="dropdown-menu">
+            <% typeBases.forEach((base) => { %>
+                <a class="dropdown-item" href="/devices/<%= base.name %>"><%= base.name %></a>
+            <% }) %>
+        </div>
+    </div>
+
+    <p class="mx-auto">Текущая база: <%= currBase.name %></p>
+</div>
+
+</div>
+
+    <table id="device-table" class="table table-hover text-center table-bordered bg-light"
+           data-toggle="table"
+           data-search="true"
+           data-show-columns="true"
+           data-pagination="true"
+           data-sort-name="serial"
+           data-sort-order="asc"
+           data-locale="ru-RU">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col" class="align-middle"><i class="fas fa-cog"></i></th>
+            <th scope="col" class="align-middle" data-sortable="true" data-field="serial">Серийный<br>№</th>
+            <th scope="col" class="align-middle">Дата</th>
+            <% if (currBase.hashcalc !== 'none') { %>
+                <th scope="col" class="align-middle">Ключ</th>
+            <% } %>
+            <% currBase.props.forEach(prop => { %>
+                <th scope="col" class="align-middle"><%= prop.propname %></th>
+            <% }) %>
+            <th scope="col" class="align-middle">Компания</th>
+            <th scope="col" class="align-middle">Объект</th>
+            <th scope="col" class="align-middle">ФИО ответственного
+                <br>Email
+                <br>Телефон
+            </th>
+            <th scope="col" class="align-middle">ФИО доп. ответственного
+                <br>Email
+                <br>Телефон
+            </th>
+            <th scope="col" class="align-middle">Местоположение</th>
+            <th scope="col" class="align-middle">Комментарий</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% devices.forEach(device => { %>
+            <tr>
+                <td>
+                    <a class="btn btn-secondary" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-cog"></i>
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="/add-to-station/<%= device.station %>-<%= device.company %>">Добавить
+                            ещё устройства к объекту</a>
+                        <a class="dropdown-item" href="/edit/serial-<%= device.serial %>">Редактировать устройство</a>
+                        <a class="dropdown-item" href="/edit/station-<%= device.station %>-<%= device.company %>">Редактировать
+                            все устройства
+                            объекта</a>
+                        <% if (lead || admin) { %>
+                            <a class="dropdown-item" href="/delete-device/<%= device.serial %>">Удалить устройство</a>
+                        <% } %>
+                        <a class="dropdown-item">Информация о добавлении: <br> <%= device.whoadded %>
+                            , <%= device.whenadded %> </a>
+                    </div>
+                </td>
+
+                <td scope="row" class="align-middle"><%= device.serial %></td>
+
+                <td class="align-middle"><%= device.year %><br><%= months[device.month - 1] %></td>
+                <% if (currBase.hashcalc !== 'none') { %>
+                    <td class="align-middle"><%= device.hash.toString().padStart(5, '0') %></td>
+                <% } %>
+                <% device.type.props.forEach(prop => { %>
+                    <th scope="col" class="align-middle"><%= prop.propvalue %></th>
+                <% }) %>
+                <td class="align-middle"><%= device.company %></td>
+
+                <td class="align-middle"><%= device.station %></td>
+
+                <td class="align-middle"><%= device.person %>
+                    <br> <%= device.email %>
+                    <br> <%= device.phone %></td>
+
+                <td class="align-middle"><%= device.person2 %>
+                    <br> <%= device.email2 %>
+                    <br> <%= device.phone2 %></td>
+
+                <td class="align-middle"><%= device.city %></td>
+
+                <td class="align-middle"><%= device.comment %></td>
+            </tr>
+        <% }) %>
+        </tbody>
+    </table>
+    <hr>
+
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru-RU&amp;apikey=ecf1da0d-157d-4bc1-b947-ba8cc775e35a"
+        type="text/javascript"></script>
+<script src="scripts/devices.js" type="text/javascript" defer></script>
+<script src="scripts/provider.js" type="text/javascript" defer></script>
+
+<%- include('partials/footer') %>

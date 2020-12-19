@@ -1,0 +1,25 @@
+<div class="btn-group">
+    <button class="btn btn-dark btn-lg dropdown-toggle dropdown-toggle mx-1 my-1" type="button"
+            id="dropdownMenuButton--Device" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+        Добавить устройство
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton--Device">
+        <a class="dropdown-item" href="/submit">К новому объекту</a>
+        <a class="dropdown-item" data-toggle="collapse" href="#collapse-addToStation" role="button"
+           aria-expanded="false" aria-controls="collapse-addToStation">К существующему объекту</a>
+    </div>
+</div>
+
+<div class="collapse" id="collapse-addToStation">
+    <div class="card card-body">
+        <form action="/add-to-station" method="POST" class="form-inline my-2 mx-auto">
+            <input class="form-control mr-sm-2" type="text" name="station" placeholder="Объект"
+                   id="station-suggest">
+            <select class="custom-select mr-sm-2" id="company-suggest" name="company"></select>
+            <button class="btn btn-outline-success my-2" type="submit">Добавить</button>
+            <a class="btn btn-danger mx-2" type='button' data-toggle="collapse" href="#collapse-addToStation"
+               role="button" aria-expanded="false" aria-controls="collapse-addToStation">Отмена</a>
+        </form>
+    </div>
+</div>
