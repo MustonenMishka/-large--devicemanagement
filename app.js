@@ -76,5 +76,5 @@ app.use("/error", require("./routes/error"));
 app.use("/download", require("./routes/download"));
 
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
 
