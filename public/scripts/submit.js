@@ -8,20 +8,39 @@ const availableTypes = await requestForTypes(); // requesting for available type
 const devicesList = document.getElementById('devices');
 document.getElementById('addMoreDevices').addEventListener('click', addDeviceHandler);
 document.getElementById('deleteDevices').addEventListener('click', deleteDeviceHandler);
-document.getElementById('serial-1').addEventListener('blur', checkIsSerialExists);
+document.getElementById('serial-1').addEventListener('blur', checkIsSerialExists.bind(this, deviceNum));
 document.getElementById('serial-1').addEventListener('focus', resetWarning);
+//document.getElementById('typeName-1').addEventListener('blur', activateSerialInput.bind(this, deviceNum));
+//document.getElementById('typeName-1').addEventListener('focus', resetSerialInput.bind(this, deviceNum));
 const cityInput = document.getElementById('city');
 
 function resetWarning() {
     this.className = 'form-control'
 }
 
-function checkIsSerialExists() {
+function activateSerialInput(deviceNum) {
+    if (!document.getElementById(`typeName-${deviceNum}`).value) {
+        return
+    }
+    const serialInput = document.getElementById(`serial-${deviceNum}`);
+    serialInput.removeAttribute('disabled');
+    serialInput.value = '';
+    resetWarning.call(serialInput);
+}
+
+// function resetSerialInput(deviceNum) {
+//
+// }
+
+function checkIsSerialExists(deviceNum) {
+    const serialInput = document.getElementById(`serial-${deviceNum}`);
+    const checkingType = document.getElementById(`typeName-${deviceNum}`).value;
+    const checkingSerial = serialInput.value;
     $.ajax({
         type: "GET",
-        url: `/serial-check/${this.value}`
+        url: `/serial-check/${checkingType}-${checkingSerial}`
     }).done(status => {
-        this.classList.add(status);
+        serialInput.classList.add(status);
     });
 }
 
@@ -34,13 +53,21 @@ function addDeviceHandler() {
             <h5 class="card-header">Устройство ${deviceNum}</h5>
             <div class="card-body">
               <div class="row">
+              <div class="col-md-4" id=typeSelector-${deviceNum}> 
+                            <label for="typeName-${deviceNum}">Тип устройства</label>
+                            <select class="custom-select" id="typeName-${deviceNum}" name=typeName-${deviceNum}>
+                                <option disabled selected>Выберите тип</option>
+                                ${availableTypes.reduce((list, type) => {
+        return (list + `<option value=${type}>${type}</option>`)}, '')}     
+                            </select><div id="typeOpt-${deviceNum}" class="mt-3"></div>
+                </div>
                 <div class="col-md-4">
                     <label for="serial-${deviceNum}">Серийный номер</label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fa fa-list-ol"></i></div>
                         </div>
-                        <input type="number" required name=serial-${deviceNum} class="form-control" placeholder="25" id="serial-${deviceNum}">
+                        <input type="number" disabled required name=serial-${deviceNum} class="form-control" placeholder="25" id="serial-${deviceNum}">
                         <div class="valid-feedback">
                             Серийный номер свободен!
                         </div>
@@ -55,23 +82,16 @@ function addDeviceHandler() {
                         <input type="month" required name=date-${deviceNum} class="form-control" placeholder="июнь 2020" id="date-${deviceNum}">
                     </div>
                 </div>
-                <div class="col-md-4" id=typeSelector-${deviceNum}> 
-                            <label for="typeName-${deviceNum}">Тип устройства</label>
-                            <select class="custom-select" id="typeName-${deviceNum}" name=typeName-${deviceNum}>
-                                <option disabled selected>Выберите тип</option>
-                                ${availableTypes.reduce((list, type) => {
-                                    return (list + `<option value=${type}>${type}</option>`)}, '')}     
-                            </select><div id="typeOpt-${deviceNum}" class="mt-3"></div>
-                </div>
             </div>
             </div>
     `;
     devicesList.appendChild(newDeviceCard);
-    document.getElementById(`serial-${deviceNum}`).addEventListener('blur', checkIsSerialExists);
+    document.getElementById(`serial-${deviceNum}`).addEventListener('blur', checkIsSerialExists.bind(this, deviceNum));
     document.getElementById(`serial-${deviceNum}`).addEventListener('focus', resetWarning);
 
     const typeSelector = document.getElementById(`typeName-${deviceNum}`);
     typeSelector.addEventListener('change', typeSelectHandler.bind(typeSelector, deviceNum));
+    typeSelector.addEventListener('blur', activateSerialInput.bind(this, deviceNum));
 }
 
 function deleteDeviceHandler() {
@@ -123,6 +143,7 @@ document.getElementById('typeSelector-1').innerHTML = `
 `
 const typeSelector = document.getElementById('typeName-1');
 typeSelector.addEventListener('change', typeSelectHandler.bind(typeSelector, deviceNum));
+typeSelector.addEventListener('blur', activateSerialInput.bind(this, deviceNum));
 
 async function requestForTypes() {
     return await $.ajax({
@@ -194,14 +215,12 @@ function createOptionSelectors(propArr, deviceIdx) {
 
 // Check if stoopid user added >1 devices with the same serial
         function checkIsDuplicatingInputs(numOfInputs) {
-            const serialInputsArr = [];
+            const InputsArr = [];
             for (let i = 1; i <= numOfInputs; i++) {
-                serialInputsArr.push(document.getElementById(`serial-${i}`).value);
+                InputsArr.push(document.getElementById(`serial-${i}`).value + '-' + document.getElementById(`typeName-${i}`).value);
             }
-            return serialInputsArr.length === new Set(serialInputsArr).size;
+            return InputsArr.length === new Set(InputsArr).size;
         }
-
-
     }
 )
 

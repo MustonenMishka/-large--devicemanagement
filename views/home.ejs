@@ -2,41 +2,96 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand ml-2 text-wrap" id="home-title" href="http://i-mt.net/laurel_home">
-        <img src="media/logo.png" width="40" height="40" class="d-inline-block align-top mr-1" alt="">Микропроцессорные технологии</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <img src="media/logo.png" width="40" height="40" class="d-inline-block align-top mr-1" alt="">Микропроцессорные
+        технологии</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <% if (isAuthenticated) { %>
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/logout">Выйти из аккаунта</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/devices">Войти в личный кабинет</a>
-            </li>
-        </ul>
-            <% } else {%>
-        <form action="/login" method="POST" class="form-inline my-2 my-lg-0 ml-auto">
-            <input class="form-control mr-sm-2" type="text" name="username" placeholder="Логин" aria-label="Search">
-            <input class="form-control mr-sm-2" type="password" name="password" placeholder="Пароль" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Войти</button>
-        </form>
-            <% }%>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Выйти из аккаунта</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/devices">Войти в личный кабинет</a>
+                </li>
+            </ul>
+        <% } else { %>
+            <form action="/login" method="POST" class="form-inline my-2 my-lg-0 ml-auto">
+                <input class="form-control mr-sm-2" type="text" name="username" placeholder="Логин" aria-label="Search">
+                <input class="form-control mr-sm-2" type="password" name="password" placeholder="Пароль"
+                       aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Войти</button>
+            </form>
+        <% } %>
     </div>
 </nav>
 <div class="container">
     <div class="row text-center my-4">
-        <div class="col-4"><p class="h4 count"><%= totalNum %><br>УСТРОЙСТВ</p></div>
+        <div class="col-4"><p class="h4 count"><%= totalNum %><br>УСТРОЙСТВ</p>
+            <a data-toggle="collapse" href="#collapse-filter" role="button"
+               aria-expanded="false" aria-controls="collapse-filter">
+                <i class="fa fa-filter" aria-hidden="true"></i></a>
+        </div>
         <div class="col-4"><p class="h4 count"><%= numOfStations %><br><%= stationWord.toUpperCase() %></p></div>
         <div class="col-4"><p class="h4 count"><%= numOfCountries %><br><%= countryWord.toUpperCase() %></p></div>
     </div>
 </div>
+
+<div class="collapse col-12 col-lg-8" id="collapse-filter">
+    <form action="/" method="POST">
+        <div class="card">
+            <div class="card-header d-flex align-items-center justify-content-between flex-wrap">
+                <span class="h6">Выбор отображаемых типов устройств на карте</span>
+                <div>
+                    <button class="btn btn-outline-success mx-1" type="submit">Применить</button>
+                    <a class="btn btn-danger mx-1" data-toggle="collapse" href="#collapse-filter"
+                       role="button" aria-expanded="false" aria-controls="collapse-filter">Отмена</a>
+                </div>
+            </div>
+            <div class="card-body py-1 d-flex align-items-start">
+                <% types.forEach((type, typeIdx) => { %>
+                    <ul class="list-group my-1 mx-2" id="typelist-<%= typeIdx %>">
+                        <li class="list-group-item form-check active p-2">
+                            <div class="form-check">
+                                <input class="form-check-input big-checkbox" type="checkbox" name="type-<%= typeIdx %>"
+                                       checked
+                                       value=<%= type.name %> id="type-<%= typeIdx %>">
+                                <label class="form-check-label" for="type-<%= typeIdx %>">
+                                    <%= type.name %>
+                                </label>
+                            </div>
+                        </li>
+                        <% if (type.props[0]) { %>
+                            <li class="list-group-item-secondary form-check px-2"><%= type.props[0].propname %></li>
+                            <% type.props[0].options.forEach((opt, optIdx) => { %>
+                                <li class="list-group-item p-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input big-checkbox" type="checkbox"
+                                               name="type-<%= typeIdx %>-opt-<%= optIdx %>" checked
+                                               value=<%= opt %> id="type-<%= typeIdx %>-opt-<%= optIdx %>">
+                                        <label class="form-check-label" for="type-<%= typeIdx %>-opt-<%= optIdx %>">
+                                            <%= opt %>
+                                        </label>
+                                    </div>
+                                </li>
+                            <% }) %>
+                        <% } %>
+                    </ul>
+                <% }) %>
+            </div>
+        </div>
+    </form>
+</div>
+
 <div class="row px-2 mx-0">
     <div id="map" class="col mx-auto"></div>
 </div>
 
-<script src="https://api-maps.yandex.ru/2.1/?lang=ru-RU&amp;apikey=ecf1da0d-157d-4bc1-b947-ba8cc775e35a" type="text/javascript"></script>
-<script src="scripts/home.js" defer ></script>
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru-RU&amp;apikey=ecf1da0d-157d-4bc1-b947-ba8cc775e35a"
+        type="text/javascript"></script>
+<script src="scripts/home.js" defer></script>
 <%- include('partials/footer') %>

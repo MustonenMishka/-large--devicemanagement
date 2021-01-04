@@ -9,6 +9,8 @@ body {
     text-align: center;
 }
 
+.big-checkbox {width: 1rem; height: 1rem}
+
 #map {
     height: 70vh;
     padding: 0;

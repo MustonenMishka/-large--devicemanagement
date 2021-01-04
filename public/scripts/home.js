@@ -1,3 +1,5 @@
+// MAP BUILDING LOGIC
+
 ymaps.ready(init);
 
 function init () {
@@ -29,4 +31,37 @@ function init () {
         objectManager.add(data);
     });
 
+}
+
+// MAP FILTERING CHECKBOX LOGIC
+initCheckboxRelations();
+
+function initCheckboxRelations() {
+    let typeCount = 0;
+    while (document.getElementById(`type-${typeCount}`)) {
+        let typeInput = document.getElementById(`type-${typeCount}`);
+        typeInput.addEventListener('change', toggleOptions.bind(typeInput, typeCount));
+        typeCount++
+    }
+}
+
+function toggleOptions(typeNum) {
+    console.log(this)
+    if (this.checked) {
+        let optCount = 0;
+        while (document.getElementById(`type-${typeNum}-opt-${optCount}`)) {
+            let optionInput = document.getElementById(`type-${typeNum}-opt-${optCount}`);
+            optionInput.disabled = false;
+            optionInput.checked = true;
+            optCount++
+        }
+    } else {
+        let optCount = 0;
+        while (document.getElementById(`type-${typeNum}-opt-${optCount}`)) {
+            let optionInput = document.getElementById(`type-${typeNum}-opt-${optCount}`);
+            optionInput.checked = false;
+            optionInput.disabled = true;
+            optCount++
+        }
+    }
 }

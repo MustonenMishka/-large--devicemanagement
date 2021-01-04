@@ -8,9 +8,7 @@ router.get("/", (req, res) => {
     renderPageForBase(req, res, 'Laurel')
 });
 
-router.get("/:typeBase", (req, res) => {
-    renderPageForBase(req, res)
-});
+router.get("/:typeBase", renderPageForBase);
 
 module.exports = router;
 
@@ -38,7 +36,6 @@ async function renderPageForBase(req, res, base) {
                 if (err) {
                     console.log(err)
                 } else {
-                    console.log(currBase, typeBases)
                     const months = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
                     return res.render("devices", {devices, currBase, typeBases, admin, lead, greet: req.user.username, months})
                 }

@@ -1,5 +1,6 @@
 <%- include('partials/header') %>
-
+<link href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css" rel="stylesheet">
+<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
 
     <div class="jumbotron text-center">
       <div class="container">
@@ -7,9 +8,13 @@
     <h1 class="display-4">Следующие устройства успешно отредактированы:</h1>
     <hr>
       </div>
-          <table id="device-table" class="table table-responsive-lg table-hover table-bordered mt-2">
+          <table id="device-table" class="table table-responsive-lg table-hover table-bordered mt-2"
+                 data-toggle="table"
+                 data-sort-name="serial"
+                 data-sort-order="asc">
               <thead class="thead-dark">
               <tr>
+                  <th scope="col" class="align-middle" data-sortable="true">Тип</th>
                   <th scope="col" class="align-middle" data-sortable="true" data-field="serial">Серийный<br>№</th>
                   <th scope="col" class="align-middle">Дата</th>
                   <th scope="col" class="align-middle">Ключ</th>
@@ -31,6 +36,7 @@
               <tbody>
               <% deviceArr.forEach((device) => { %>
           <tr>
+              <td scope="row" class="align-middle"><%= device.type.name %></td>
 
               <td scope="row" class="align-middle"><%= device.serial %></td>
 

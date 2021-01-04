@@ -2,17 +2,26 @@ const express = require("express");
 const router = express.Router();
 
 const Type = require('../models/Type');
+const Device = require('../models/Device');
 
 router.post("/", (req, res) => {
-    Type.findOneAndRemove({name: req.body.typeName},
-        function (err, type) {
+    const deletingType = req.body.typeName;
+    Type.findOneAndRemove({name: deletingType}, async (err, type) => {
             if (!type) {
-                res.render("error", {
+                return res.render("error", {
                     errorText: 'Тип устройств не существует'
                 })
-            } else if (!err)
-                res.render("deletedType", {type});
-            else {
+            } else if (!err) {
+                const devices = await Device.find({'type.name': deletingType});
+                console.log(devices);
+                await Device.deleteMany({'type.name': deletingType}, err => {
+                    if (err) {
+                        console.log(err)
+                    } else {
+                        res.render("deletedType", {type, devices});
+                    }
+                })
+            } else {
                 console.log(err);
             }
         });

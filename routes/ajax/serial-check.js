@@ -3,8 +3,12 @@ const router = express.Router();
 
 const Device = require('../../models/Device');
 
-router.get("/:serial", (req, res) => { // check if serial exists in DB when adding device
-    Device.findOne({serial: req.params.serial}, (err, exist) => {
+router.get("/:typeSerial", (req, res) => { // check if serial exists in DB when adding device
+    const [type, serial] = req.params.typeSerial.split('-');
+    if (!type || !serial) {
+        return
+    }
+    Device.findOne({serial, 'type.name': type}, (err, exist) => {
         if (err) {
             console.log(err);
         } else if (exist) {

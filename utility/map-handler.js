@@ -7,11 +7,13 @@ function createMapData(dbData) {
     const citiesArr = [];
     for (const device of dbData) {
         const match = citiesArr.find( some => some.lat===device.coords.lat && some.lng===device.coords.lng);
+        const typeDesc = device.type.props[0] ? `${device.type.name}-${device.type.props[0].propvalue}` : device.type.name;
+
         if (match) {
-            if (device.type.name in match.types) {
-                match.types[device.type.name]++
+            if (typeDesc in match.types) {
+                match.types[typeDesc]++
             } else {
-                match.types[device.type.name] = 1;
+                match.types[typeDesc] = 1;
             }
         } else {
             citiesArr.push({
@@ -20,7 +22,7 @@ function createMapData(dbData) {
                 city: device.city,
                 country: device.country,
                 types: {
-                    [device.type.name]: 1
+                    [typeDesc]: 1
                 }
             })
         }
@@ -44,7 +46,7 @@ function createMapData(dbData) {
             id: idx,
             geometry: {type: "Point", coordinates: [marker.lat, marker.lng]},
             properties: {
-                balloonContentHeader: `<p><b>${marker.city}</b></p>`,
+                balloonContentHeader: `<p><b>${marker.city}</b></p><hr>`,
                 balloonContentBody: objDescription,
             }});
         yandexMarkersJSON = JSON.stringify(yandexMarkers);

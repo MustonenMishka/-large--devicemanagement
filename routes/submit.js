@@ -10,32 +10,28 @@ router.get("/", (req, res) => {
     (req.isAuthenticated()) ? res.render("submit", {toNewStation}) : res.redirect("/login");
 });
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
     // parsing request body and building array of new devices for DB
-    console.log(req.body);
     const newDevices = [...parseDevicesFromRequest(req)];
 
-    Device.find({serial: {$in: [...newDevices.map(device => device.serial)]}}, (err, foundDeviceArr) => { // check if some of added devices are already exist in DB
-        if (err) {
-            console.log(err)
-        } else if (foundDeviceArr.length) {
-            res.render("deviceAddError", {
-                errorText: 'Устройство с данным серийным номером уже существует',
-                deviceArr: foundDeviceArr
-            })
-        } else {
-            // if no duplicating, adding devices
-            Device.insertMany(newDevices, (err, devices) => {
-                    if (err) {
-                        console.log(err)
-                    } else {
-                        //emailSender(devices);                    //UNCOMMENT!!!!!
-                        res.render("addedDevices", {devices});
-                    }
+    const duplicate = await hasDuplicates(newDevices); // check for duplicates
+
+    if (!duplicate) {
+        Device.insertMany(newDevices, (err, devices) => {
+                if (err) {
+                    console.log(err)
+                } else {
+                    //emailSender(devices);                    //UNCOMMENT!!!!!
+                    return res.render("addedDevices", {devices});
                 }
-            )
-        }
-    });
+            }
+        )
+    } else {
+        return res.render("deviceAddError", {
+            errorText: 'Устройство с данным серийным номером уже существует',
+            deviceArr: [duplicate]
+        })
+    }
 });
 
 module.exports = router;
@@ -86,6 +82,15 @@ function parseDevicesFromRequest(req) {
         devicesNum++;
     }
     return newDevices
+}
+
+async function hasDuplicates(deviceArr) {
+    for (let device of deviceArr) { // check if some of added devices are already exist in DB
+        let duplicate = await Device.findOne({serial: device.serial, 'type.name': device.type.name});
+        if (duplicate) {
+            return duplicate
+        }
+    }
 }
 
 //Selecting license key calculating method
