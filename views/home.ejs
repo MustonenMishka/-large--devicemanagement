@@ -31,17 +31,19 @@
 </nav>
 <div class="container">
     <div class="row text-center my-4">
-        <div class="col-4"><p class="h4 count"><%= totalNum %><br>УСТРОЙСТВ</p>
-            <a data-toggle="collapse" href="#collapse-filter" role="button"
-               aria-expanded="false" aria-controls="collapse-filter">
-                <i class="fa fa-filter" aria-hidden="true"></i></a>
+        <div class="col-4">
+            <p class="h4 count"><%= totalNum %><br>УСТРОЙСТВ
+                <a data-toggle="collapse" href="#collapse-filter" role="button" aria-expanded="false" aria-controls="collapse-filter">
+                    <i class="fa fa-filter" aria-hidden="true"></i>
+                </a>
+            </p>
         </div>
         <div class="col-4"><p class="h4 count"><%= numOfStations %><br><%= stationWord.toUpperCase() %></p></div>
         <div class="col-4"><p class="h4 count"><%= numOfCountries %><br><%= countryWord.toUpperCase() %></p></div>
     </div>
 </div>
 
-<div class="collapse col-12 col-lg-8" id="collapse-filter">
+<div class="collapse col-12" id="collapse-filter">
     <form action="/" method="POST">
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between flex-wrap">
@@ -52,7 +54,7 @@
                        role="button" aria-expanded="false" aria-controls="collapse-filter">Отмена</a>
                 </div>
             </div>
-            <div class="card-body py-1 d-flex align-items-start">
+            <div class="card-body py-1 d-flex flex-wrap align-items-start">
                 <% types.forEach((type, typeIdx) => { %>
                     <ul class="list-group my-1 mx-2" id="typelist-<%= typeIdx %>">
                         <li class="list-group-item form-check active p-2">
