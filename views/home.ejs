@@ -49,8 +49,9 @@
             <div class="card-header d-flex align-items-center justify-content-between flex-wrap">
                 <span class="h6">Выбор отображаемых типов устройств на карте</span>
                 <div>
-                    <button class="btn btn-outline-success mx-1" type="submit">Применить</button>
-                    <a class="btn btn-danger mx-1" data-toggle="collapse" href="#collapse-filter"
+                    <button class="btn btn-outline-success mx-1 my-1" type="submit">Применить</button>
+                    <button class="btn btn-outline-secondary mx-1 my-1" type="button" id="all-checkbox-toggle">Выделить/Снять всё</button>
+                    <a class="btn btn-danger mx-1 my-1" data-toggle="collapse" href="#collapse-filter"
                        role="button" aria-expanded="false" aria-controls="collapse-filter">Отмена</a>
                 </div>
             </div>
@@ -61,7 +62,7 @@
                             <div class="form-check">
                                 <input class="form-check-input big-checkbox" type="checkbox" name="type-<%= typeIdx %>"
                                        checked
-                                       value=<%= type.name %> id="type-<%= typeIdx %>">
+                                       value="<%= type.name %>" id="type-<%= typeIdx %>">
                                 <label class="form-check-label" for="type-<%= typeIdx %>">
                                     <%= type.name %>
                                 </label>
@@ -74,7 +75,7 @@
                                     <div class="form-check">
                                         <input class="form-check-input big-checkbox" type="checkbox"
                                                name="type-<%= typeIdx %>-opt-<%= optIdx %>" checked
-                                               value=<%= opt %> id="type-<%= typeIdx %>-opt-<%= optIdx %>">
+                                               value="<%= opt %>" id="type-<%= typeIdx %>-opt-<%= optIdx %>">
                                         <label class="form-check-label" for="type-<%= typeIdx %>-opt-<%= optIdx %>">
                                             <%= opt %>
                                         </label>

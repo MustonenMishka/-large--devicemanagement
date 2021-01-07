@@ -58,7 +58,7 @@ function addDeviceHandler() {
                             <select class="custom-select" id="typeName-${deviceNum}" name=typeName-${deviceNum}>
                                 <option disabled selected>Выберите тип</option>
                                 ${availableTypes.reduce((list, type) => {
-        return (list + `<option value=${type}>${type}</option>`)}, '')}     
+        return (list + `<option value="${type}">${type}</option>`)}, '')}     
                             </select><div id="typeOpt-${deviceNum}" class="mt-3"></div>
                 </div>
                 <div class="col-md-4">
@@ -67,7 +67,7 @@ function addDeviceHandler() {
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fa fa-list-ol"></i></div>
                         </div>
-                        <input type="number" disabled required name=serial-${deviceNum} class="form-control" placeholder="25" id="serial-${deviceNum}">
+                        <input type="number" disabled required name="serial-${deviceNum}" class="form-control" placeholder="25" id="serial-${deviceNum}">
                         <div class="valid-feedback">
                             Серийный номер свободен!
                         </div>
@@ -79,7 +79,7 @@ function addDeviceHandler() {
                 <div class="col-md-4">
                     <label for="date-${deviceNum}">Дата производства</label>
                     <div class="input-group mb-3">
-                        <input type="month" required name=date-${deviceNum} class="form-control" placeholder="июнь 2020" id="date-${deviceNum}">
+                        <input type="month" required name="date-${deviceNum}" class="form-control" placeholder="июнь 2020" id="date-${deviceNum}">
                     </div>
                 </div>
             </div>
@@ -138,7 +138,7 @@ document.getElementById('typeSelector-1').innerHTML = `
         <select required class="custom-select" id="typeName-1" name="typeName-1">
         <option disabled selected value="">Выберите тип</option>
         ${availableTypes.reduce((list, type) => {
-    return (list + `<option value=${type}>${type}</option>`)}, '')}  
+    return (list + `<option value="${type}">${type}</option>`)}, '')}  
         </select><div id="typeOpt-1" class="mt-3"></div>
 `
 const typeSelector = document.getElementById('typeName-1');
@@ -163,7 +163,7 @@ function typeSelectHandler(deviceIdx) {
         type: "GET",
         url: `/type-suggest/${this.value}`
     }).done(([props, hashCalc]) => {
-        this.nextSibling.innerHTML = `<input type="hidden" name=hashCalc-${deviceIdx} value=${hashCalc}>`
+        this.nextSibling.innerHTML = `<input type="hidden" name="hashCalc-${deviceIdx}" value="${hashCalc}">`;
         if (props.length === 0) {
             return
         }
@@ -177,16 +177,16 @@ function createOptionSelectors(propArr, deviceIdx) {
 
     propArr.forEach((prop, propIdx) => {
         const optionList = prop.options.reduce((list, option) => {
-            return (list + `<option value=${option}>${option}</option>`)}, '');        // Creating list of dropdown options
+            return (list + `<option value="${option}">${option}</option>`)}, '');        // Creating list of dropdown options
 
         const propSelector = document.createElement('div');           // Creating selectors with options
         propSelector.setAttribute('class', 'input-group mb-3');
         propSelector.innerHTML = `
             <div class="input-group-prepend">
                 <label class="input-group-text" for="prop-${deviceIdx}-${propIdx + 1}">${prop.propname}</label>
-                <input type="hidden" name=propName-${deviceIdx}-${propIdx + 1} value="${prop.propname}">
+                <input type="hidden" name="propName-${deviceIdx}-${propIdx + 1}" value="${prop.propname}">
             </div>
-            <select required class="custom-select" name=propVal-${deviceIdx}-${propIdx + 1} id="prop-${deviceIdx}-${propIdx + 1}">
+            <select required class="custom-select" name="propVal-${deviceIdx}-${propIdx + 1}" id="prop-${deviceIdx}-${propIdx + 1}">
                 <option disabled selected value="">Выберите тип</option>
                 ${optionList}
             </select>

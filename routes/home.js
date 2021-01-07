@@ -24,7 +24,7 @@ async function renderHomepage(req, res) {
         } else {
             if (req.method === "POST") { // If we are submitting filter-type form and processing POST req
                 const filterObj = createFilterObj(req.body, types);
-                console.log(filterObj)
+                console.log(filterObj);
                 foundDevices = filterDevices(foundDevices, filterObj)
             }
 
@@ -56,6 +56,7 @@ function createFilterObj(inputs, types) {
     const filterObj = {};
     for (let typeCount = 0; typeCount < types.length; typeCount++) {
         if (inputs[`type-${typeCount}`]) {
+            console.log(inputs[`type-${typeCount}`])
             if (types.find(type => type.name === inputs[`type-${typeCount}`]).props.length === 0) { // if type has no options
                 filterObj[inputs[`type-${typeCount}`]] = true // no array of options, all type is one unit
             } else {

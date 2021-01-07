@@ -34,7 +34,10 @@ function init () {
 }
 
 // MAP FILTERING CHECKBOX LOGIC
+
 initCheckboxRelations();
+let allChecked = true;
+document.getElementById("all-checkbox-toggle").addEventListener('click', toggleAllCheckboxes);
 
 function initCheckboxRelations() {
     let typeCount = 0;
@@ -46,7 +49,6 @@ function initCheckboxRelations() {
 }
 
 function toggleOptions(typeNum) {
-    console.log(this)
     if (this.checked) {
         let optCount = 0;
         while (document.getElementById(`type-${typeNum}-opt-${optCount}`)) {
@@ -64,4 +66,16 @@ function toggleOptions(typeNum) {
             optCount++
         }
     }
+}
+
+function toggleAllCheckboxes() {
+    let typeCount = 0;
+    while (document.getElementById(`type-${typeCount}`)) {
+        let typeInput = document.getElementById(`type-${typeCount}`);
+        typeInput.checked = !allChecked;
+        let event = new Event('change');
+        typeInput.dispatchEvent(event);
+        typeCount++
+    }
+    allChecked = !allChecked;
 }
