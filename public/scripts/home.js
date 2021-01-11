@@ -4,11 +4,11 @@ ymaps.ready(init);
 
 function init () {
     var myMap = new ymaps.Map('map', {
-            center: [60.0, 75.0],
+            center: [0, 0],
             zoom: 0,
             controls: [],
         }, {
-            restrictMapArea: [[-10, -40], [80, 220]],
+            restrictMapArea: [[-30, -70], [80, 280]],
             searchControlProvider: 'yandex#search'
         }),
         objectManager = new ymaps.ObjectManager({

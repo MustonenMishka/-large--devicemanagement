@@ -88,7 +88,6 @@ function addOptHandler(propNum) {
         aria-describedby="prop-${propNum}-opt-${optNum}">
     `;
     document.getElementById(`optList-${propNum}`).appendChild(newOpt);
-    console.log(optCounts);
 }
 
 function deleteOptHandler(propNum) {

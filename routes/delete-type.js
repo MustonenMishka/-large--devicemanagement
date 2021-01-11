@@ -13,7 +13,6 @@ router.post("/", (req, res) => {
                 })
             } else if (!err) {
                 const devices = await Device.find({'type.name': deletingType});
-                console.log(devices);
                 await Device.deleteMany({'type.name': deletingType}, err => {
                     if (err) {
                         console.log(err)

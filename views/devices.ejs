@@ -13,7 +13,7 @@
 
         <% if (admin) { %>
             <i class="fas fa-user-plus fa-6x"></i>
-            <h1 class="display-4 mb-4">Добавьте устройство, базу или пользователя</h1>
+            <h2 class="my-2">Добавьте устройство, базу или пользователя</h2>
             <hr>
 
             <%- include('partials/adminControls') %>
@@ -27,8 +27,9 @@
         <% } %>
 
         <hr>
-<div class="row">
-    <div class="btn-group dropright float-left">
+<div>
+    <h4>Текущая база: <%= currBase.name %></h4>
+    <div class="btn-group dropright mx-auto">
         <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Выбор базы
         </button>
@@ -38,8 +39,6 @@
             <% }) %>
         </div>
     </div>
-
-    <p class="mx-auto">Текущая база: <%= currBase.name %></p>
 </div>
 
 </div>
