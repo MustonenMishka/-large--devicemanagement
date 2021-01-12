@@ -1,14 +1,28 @@
 function createMapData(dbData) {
-    const total = dbData.length;
+    const totalNum = dbData.length;
 
-    const stationsArr = dbData.map(device => device.station.trim().toLowerCase());
-    const stationsSet = new Set(stationsArr);
+    const stationsArr = dbData.map(device => {
+        return {
+            station: device.station.trim().toLowerCase(),
+            lat: device.coords.lat,
+            lng: device.coords.lng
+        }
+    });
+    const uniqueStationsArr = [];
+    stationsArr.forEach(station => {
+        if (!uniqueStationsArr.find(some =>
+            some.station === station.station &&
+            some.lat === station.lat &&
+            some.lng === station.lng )) {
+            uniqueStationsArr.push(station)
+        }
+    });  // Forming array of unique (location+name) stations
+    const stationsNum = uniqueStationsArr.length;
 
     const citiesArr = [];
-    for (const device of dbData) {
+    dbData.forEach( device => {
         const match = citiesArr.find( some => some.lat===device.coords.lat && some.lng===device.coords.lng);
         const typeDesc = device.type.props[0] ? `${device.type.name}-${device.type.props[0].propvalue}` : device.type.name;
-
         if (match) {
             if (typeDesc in match.types) {
                 match.types[typeDesc]++
@@ -25,14 +39,8 @@ function createMapData(dbData) {
                     [typeDesc]: 1
                 }
             })
-        }
-    }
-
-    const countriesArr = citiesArr.reduce((acc, val) =>  {
-        acc[val.country] = acc[val.country] === undefined ? 1 : acc[val.country]++;
-        return acc;
-    }, {});
-
+        } // Forming array for Map-Markers (unique lat+lng)
+    })
     const yandexMarkers = {
         type: "FeatureCollection",
         features: [],
@@ -52,8 +60,14 @@ function createMapData(dbData) {
         yandexMarkersJSON = JSON.stringify(yandexMarkers);
     });
 
+    const countriesArr = citiesArr.reduce((acc, val) =>  { // Array of unique countries
+        acc[val.country] = acc[val.country] === undefined ? 1 : acc[val.country]++;
+        return acc;
+    }, {});
+    const countriesNum = Object.keys(countriesArr).length;
 
-    return [stationsSet.size, Object.keys(countriesArr).length, total, yandexMarkersJSON];
+
+    return [stationsNum, countriesNum, totalNum, yandexMarkersJSON]; // Numbers for headings and markers for map
 }
 
 module.exports = createMapData;

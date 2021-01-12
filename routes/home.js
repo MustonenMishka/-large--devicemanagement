@@ -23,7 +23,7 @@ async function renderHomepage(req, res) {
             console.log(err)
         } else {
             const isAuthenticated = req.isAuthenticated();
-            let prevFilterConfig = {}; // Setting filter checkboxes configuration
+            let prevFilterConfig = 'all'; // Setting filter checkboxes configuration
 
             if (req.method === "POST") { // If we are submitting filter-type form and processing POST req
                 const filterObj = createFilterObj(req.body, types);
