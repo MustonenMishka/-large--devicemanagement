@@ -61,7 +61,7 @@
                         <li class="list-group-item form-check active p-2">
                             <div class="form-check">
                                 <input class="form-check-input big-checkbox" type="checkbox" name="type-<%= typeIdx %>"
-                                        <%= `type-${typeIdx}` in prevFilterConfig || prevFilterConfig === 'all' ? 'checked' : null %>
+                                        <%= prevFilterConfig === 'all' || `type-${typeIdx}` in prevFilterConfig ? 'checked' : null %>
                                        value="<%= type.name %>" id="type-<%= typeIdx %>">
                                 <label class="form-check-label" for="type-<%= typeIdx %>"><%= type.name %></label>
                             </div>
@@ -73,7 +73,7 @@
                                     <div class="form-check">
                                         <input class="form-check-input big-checkbox" type="checkbox"
                                                name="type-<%= typeIdx %>-opt-<%= optIdx %>"
-                                                <%= `type-${typeIdx}-opt-${optIdx}` in prevFilterConfig || prevFilterConfig === 'all' ? 'checked' : null %>
+                                                <%= prevFilterConfig === 'all' || `type-${typeIdx}-opt-${optIdx}` in prevFilterConfig ? 'checked' : null %>
                                                value="<%= opt %>" id="type-<%= typeIdx %>-opt-<%= optIdx %>">
                                         <label class="form-check-label" for="type-<%= typeIdx %>-opt-<%= optIdx %>"><%= opt %></label>
                                     </div>
