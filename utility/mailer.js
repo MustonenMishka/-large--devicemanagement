@@ -1,20 +1,23 @@
 function emailSender(devices) {
+    if (!devices || devices.length === 0) {
+        return
+    }
 
     const nodemailer = require ('nodemailer');
 
     const transporter = nodemailer.createTransport({ // ADD YOUR HOST EMAIL ADDRESS HERE
         service: 'gmail',
         auth: {
-            user: 'laurel.license.service@gmail.com',
-            pass: 'imt630110'
+            user: 'YOUR_EMAIL',
+            pass: 'YOUR_EMAILS_PASSWORD'
         }
     });
 
     const mailOptions = {
-        from: 'laurel.license.service@gmail.com',
+        from: 'YOUR_EMAIL',
         to: `${devices[0].email}, ${devices[0].email2}`,
-        subject: 'Ключи активации Laurel зарегистрированы',
-        text: `${devices.map(device => `Серийный номер: ${device.serial}, Ключ активации: ${device.hash} `).join('\n')}`
+        subject: 'Devices license keys were successfully registered',
+        text: `${devices.map(device => `Device type: ${device.type.name}${device.type.props[0] ? '-'+device.type.props[0].propvalue : ''}, Serial №: ${device.serial}, License key: ${device.hash} `).join('\n')}`
     };
 
     transporter.sendMail(mailOptions, (err, data) => {

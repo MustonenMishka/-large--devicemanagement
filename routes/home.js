@@ -17,7 +17,7 @@ module.exports = router;
 
 
 async function renderHomepage(req, res) {
-    const types = await Type.find({})
+    const types = await Type.find({});
     await Device.find({}, (err, foundDevices) => {
         if (err) {
             console.log(err)
@@ -38,8 +38,11 @@ async function renderHomepage(req, res) {
                 }
             });
             // Setting heading words
-            const countryWord = declOfNum(numOfCountries, ['страна', 'страны', 'стран']);
-            const stationWord = declOfNum(numOfStations, ['объект', 'объекта', 'объектов']);
+            // const countryWord = declOfNum(numOfCountries, ['страна', 'страны', 'стран']);
+            // const stationWord = declOfNum(numOfStations, ['объект', 'объекта', 'объектов']);
+
+            const countryWord = 'countries';
+            const stationWord = 'stations';
 
             res.render("home", {
                 types,

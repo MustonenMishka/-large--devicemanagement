@@ -1,3 +1,4 @@
+// This is algorithm for calculating device serial key
 
 function toHexBytes (dec, bytes) {
     const result = [];

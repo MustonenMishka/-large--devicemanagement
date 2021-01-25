@@ -9,7 +9,7 @@ router.post("/", (req, res) => {
     Type.findOneAndRemove({name: deletingType}, async (err, type) => {
             if (!type) {
                 return res.render("error", {
-                    errorText: 'Тип устройств не существует'
+                    errorText: 'Device type does not exist'
                 })
             } else if (!err) {
                 const devices = await Device.find({'type.name': deletingType});

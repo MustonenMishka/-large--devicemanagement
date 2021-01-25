@@ -5,7 +5,7 @@ const Device = require('../models/Device');
 const Type = require('../models/Type');
 
 router.get("/", (req, res) => {
-    renderPageForBase(req, res, 'Laurel')
+    renderPageForBase(req, res, 'Engine')
 });
 
 router.get("/:typeBase", renderPageForBase);
@@ -36,7 +36,7 @@ async function renderPageForBase(req, res, base) {
                 if (err) {
                     console.log(err)
                 } else {
-                    const months = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
+                    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
                     return res.render("devices", {devices, currBase, typeBases, admin, lead, greet: req.user.username, months})
                 }
             }

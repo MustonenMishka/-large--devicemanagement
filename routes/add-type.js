@@ -12,7 +12,7 @@ router.post("/", (req, res) => {
         Type.find({name: req.body.typeName}, (err, type) => {
             if (type.length) {
                 res.render("error", {
-                    errorText: 'Тип устройств с данным именем уже существует',
+                    errorText: 'Device type with this name already exists',
                 })
             } else {
                 const props = parsePropsFromInputs(req.body);

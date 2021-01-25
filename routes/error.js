@@ -5,7 +5,7 @@ router.get("/", (req, res) => {
     const deviceAddingError = false;
     const userDeletionError = false;
     res.render("error", {
-        errorText: 'Пользователя не существует / Неправильный пароль',
+        errorText: 'User does not exist / Wrong password',
         deviceAddingError,
         userDeletionError
     })

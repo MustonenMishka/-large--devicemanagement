@@ -11,7 +11,7 @@ router.post("/", (req, res) => {
     User.find({username: req.body.username}, function (err, user) {
         if (user.length) {
             res.render("error", {
-                errorText: 'Пользователь с данным именем уже существует'
+                errorText: 'User with this name already exists'
             })
         } else {
             User.register({

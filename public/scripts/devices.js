@@ -24,12 +24,10 @@ function init() {
 }
 
 function addCompanySuggest(station) {
-    console.log(station);
     $.ajax({
         type: "GET",
         url: `/company-suggest/${station}`
     }).done (companies => {
-        console.log(companies);
         fillCompanySelector(companies) // наполняем селектор опциями - компаниями, найденными в базе
     });
 }

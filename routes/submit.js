@@ -3,7 +3,7 @@ const router = express.Router();
 
 const Device = require('../models/Device');
 const crc = require("../utility/crc.js"); // In this file all hash-calculating logic is done
-const emailSender = require("../utility/mailer.js"); // Connecting auto-email-sending system
+//const emailSender = require("../utility/mailer.js"); // Connecting auto-email-sending system
 
 router.get("/", (req, res) => {
     const toNewStation = true;
@@ -21,14 +21,14 @@ router.post("/", async (req, res) => {
                 if (err) {
                     console.log(err)
                 } else {
-                    //emailSender(devices);                    //UNCOMMENT!!!!!
+                    //emailSender(devices.filter(device => device.hash !== null)); // send emails only for devices, that have license key calculation
                     return res.render("addedDevices", {devices});
                 }
             }
         )
     } else {
         return res.render("deviceAddError", {
-            errorText: 'Устройство с данным серийным номером уже существует',
+            errorText: 'Device with this serial № already exists',
             deviceArr: [duplicate]
         })
     }

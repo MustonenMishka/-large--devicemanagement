@@ -28,7 +28,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // connecting DB
-mongoose.connect("mongodb+srv://mishka:1994-455@cluster0-mqcnk.mongodb.net/I-MT", { // ADD PATH TO DB HERE!
+mongoose.connect(process.ENV.MONGODB_URI, { // ADD PATH TO DB HERE!
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false
@@ -77,4 +77,3 @@ app.use("/download", require("./routes/download"));
 
 
 app.listen(process.env.PORT || 3000);
-

@@ -7,7 +7,7 @@ router.get("/", (req, res) => {
     Type.findOne({name: req.query.typeName}, (err, type) => {
             if (!type) {
                 res.render("error", {
-                    errorText: 'Тип устройств не существует'
+                    errorText: 'Device type does not exist'
                 })
             } else if (!err)
                 res.render("editType", {type});

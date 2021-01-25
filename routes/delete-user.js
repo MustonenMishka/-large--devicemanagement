@@ -8,7 +8,7 @@ router.post("/", (req, res) => {
         function (err, user) {
             if (!user) {
                 res.render("error", {
-                    errorText: 'Пользователя не существует'
+                    errorText: 'User does not exist'
                 })
             } else if (!err)
                 res.render("deletedUser", {user});
