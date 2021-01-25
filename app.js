@@ -28,7 +28,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // connecting DB
-mongoose.connect(process.ENV.MONGODB_URI, { // ADD PATH TO DB HERE!
+mongoose.connect(process.env.MONGODB_URI, { // ADD PATH TO DB HERE!
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false
