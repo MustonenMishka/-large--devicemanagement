@@ -1,0 +1,18 @@
+<a class="btn btn-secondary" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+   aria-haspopup="true" aria-expanded="false">
+    <i class="fas fa-cog"></i>
+</a>
+
+<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <a class="dropdown-item" href="/add-to-station/<%= device.station %>-<%= device.company %>">Добавить
+        ещё устройства к объекту</a>
+    <a class="dropdown-item" href="/edit/serial-<%= device.serial %>">Редактировать устройство</a>
+    <a class="dropdown-item" href="/edit/station-<%= device.station %>-<%= device.company %>">Редактировать
+        все устройства
+        объекта</a>
+    <% if (lead || admin) { %>
+        <a class="dropdown-item" href="/delete-device/<%= device.serial %>">Удалить устройство</a>
+    <% } %>
+    <a class="dropdown-item">Информация о добавлении: <br> <%= device.whoadded %>
+        , <%= device.whenadded %> </a>
+</div>

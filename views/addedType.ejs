@@ -2,13 +2,16 @@
 
 
 <div class="jumbotron centered">
-  <div class="container">
-    <i class="fas fa-check fa-6x"></i>
-    <h1 class="display-3">Тип устройств <%= typeName %> успешно <%= edited ? 'отредактирован' : 'добавлен'%>!</h1>
-    <hr>
-    <a class="btn btn-light btn-lg" href="/add-type" role="button">Создать ещё тип</a>
-    <a class="btn btn-light btn-lg" href="/devices" role="button">Вернуться в личный кабинет</a>
-  </div>
+    <div class="container">
+        <i class="fas fa-check fa-6x"></i>
+        <h1 class="display-3">Device type <%= typeName %> was successfully <%= edited ? 'edited' : 'added' %>!</h1>
+        <hr>
+
+        <div class="my-4">
+            <a class="btn btn-light btn-lg" href="/add-type" role="button">Create another type</a>
+            <a class="btn btn-light btn-lg" href="/devices" role="button">Back to console</a>
+        </div>
+    </div>
 </div>
 
 <%- include('partials/footer') %>

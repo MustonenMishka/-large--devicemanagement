@@ -50,34 +50,34 @@ function addDeviceHandler() {
     newDeviceCard.setAttribute('class', 'card');
     newDeviceCard.setAttribute('id', `device-${deviceNum}`);
     newDeviceCard.innerHTML = `
-            <h5 class="card-header">Устройство ${deviceNum}</h5>
+            <h5 class="card-header">Device ${deviceNum}</h5>
             <div class="card-body">
               <div class="row">
               <div class="col-md-4" id=typeSelector-${deviceNum}> 
-                            <label for="typeName-${deviceNum}">Тип устройства</label>
+                            <label for="typeName-${deviceNum}">Device type</label>
                             <select class="custom-select" id="typeName-${deviceNum}" name=typeName-${deviceNum}>
-                                <option disabled selected>Выберите тип</option>
+                                <option disabled selected>Select type</option>
                                 ${availableTypes.reduce((list, type) => {
         return (list + `<option value="${type}">${type}</option>`)}, '')}     
                             </select><div id="typeOpt-${deviceNum}" class="mt-3"></div>
                 </div>
                 <div class="col-md-4">
-                    <label for="serial-${deviceNum}">Серийный номер</label>
+                    <label for="serial-${deviceNum}">Serial №</label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fa fa-list-ol"></i></div>
                         </div>
                         <input type="number" disabled required name="serial-${deviceNum}" class="form-control" placeholder="25" id="serial-${deviceNum}">
                         <div class="valid-feedback">
-                            Серийный номер свободен!
+                            Serial № available!
                         </div>
                         <div class="invalid-feedback">
-                            Серийный номер уже существует!
+                            Serial № already exists!
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <label for="date-${deviceNum}">Дата производства</label>
+                    <label for="date-${deviceNum}">Manufacturing data</label>
                     <div class="input-group mb-3">
                         <input type="month" required name="date-${deviceNum}" class="form-control" placeholder="июнь 2020" id="date-${deviceNum}">
                     </div>
@@ -134,9 +134,9 @@ async function getCoordsFromAddress(address) {
 
 // ================= DEVICE-TYPES OPTIONS LOGIC =================
 document.getElementById('typeSelector-1').innerHTML = `
-    <label for="typeName-1">Тип устройства</label>
+    <label for="typeName-1">Device type</label>
         <select required class="custom-select" id="typeName-1" name="typeName-1">
-        <option disabled selected value="">Выберите тип</option>
+        <option disabled selected value="">Select type</option>
         ${availableTypes.reduce((list, type) => {
     return (list + `<option value="${type}">${type}</option>`)}, '')}  
         </select><div id="typeOpt-1" class="mt-3"></div>

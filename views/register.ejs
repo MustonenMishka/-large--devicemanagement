@@ -1,32 +1,32 @@
 <%- include('partials/header') %>
-<a class="btn btn-outline-dark btn-lg m-2" href="/devices" role="button">В личный кабинет</a>
+<a class="btn btn-outline-dark btn-lg m-2" href="/devices" role="button">Back to console</a>
 <div class="container mt-4">
     <div class="row mt-5">
-        <div class="col-md-8 mx-auto">
-            <h1>Регистрация нового пользователя</h1>
+        <div class="col-md-6 mx-auto">
+            <h1>Register new user</h1>
             <div class="card">
                 <div class="card-body">
 
                     <form action="/register" method="POST">
                         <div class="form-group">
-                            <label for="text">Логин</label>
+                            <label for="text">Login</label>
                             <input type="text" class="form-control" name="username">
                         </div>
                         <div class="form-group">
-                            <label for="password">Пароль</label>
+                            <label for="password">Password</label>
                             <input type="password" class="form-control" name="password">
                         </div>
 
                         <div class="form-check float-right ml-5">
                             <input type="checkbox" name="lead" value="1" class="form-check-input" id="lead">
-                            <label class="form-check-label" for="is-boss">Руководитель</label>
+                            <label class="form-check-label" for="is-boss">Manager</label>
                         </div>
                         <div class="form-check float-right">
                             <input type="checkbox" name="admin" value="1" class="form-check-input" id="admin">
-                            <label class="form-check-label" for="is-admin">Администратор</label>
+                            <label class="form-check-label" for="is-admin">Admin</label>
                         </div>
 
-                        <button type="submit" class="btn btn-dark mt-3">Зарегистрировать</button>
+                        <button type="submit" class="btn btn-dark mt-3">Register</button>
 
                     </form>
 

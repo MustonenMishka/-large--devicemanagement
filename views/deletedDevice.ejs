@@ -4,29 +4,14 @@
     <div class="jumbotron text-center">
       <div class="container">
     <i class="fas fa-check fa-6x"></i>
-    <h1 class="display-4">Следующее устройство успешно удалено:</h1>
+    <h1 class="display-4">Device was successfully deleted:</h1>
     <hr>
-    <table class="table table-bordered mt-5">
 
-      <thead class="thead-dark">
-      <tr>
-          <th scope="col" class="align-middle" data-sortable="true" data-field="type">Тип</th>
-        <th scope="col" class="align-middle">Серийный №</th>
-        <th scope="col" class="align-middle">Дата</th>
-      </tr>
-      </thead>
+          <%- include('partials/shortenedTable', { devices: [device] }) %>
 
-      <tbody>
-        <tr class="text-center">
-            <td scope="row" class="align-middle"><%= device.type.name %></td>
-          <td scope="row" class="align-middle"><%= device.serial %></td>
-          <td class="align-middle"><%= device.year %>-<%= device.month %></td>
-        </tr>
-      </tbody>
-
-    </table>
-
-    <a class="btn btn-light btn-lg" href="/devices" role="button">Вернуться в личный кабинет</a>
+          <div class="my-4">
+              <a class="btn btn-light btn-lg" href="/devices" role="button">Back to console</a>
+          </div>
   </div>
 </div>
 

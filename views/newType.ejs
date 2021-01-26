@@ -1,18 +1,18 @@
 <%- include('partials/header') %>
 
-<a class="btn btn-outline-dark btn-lg m-2" href="/devices" role="button">Назад</a>
+<a class="btn btn-outline-dark btn-lg m-2" href="/devices" role="button">Back to console</a>
 
 <div class="container">
     <div class="jumbotron text-center my-0 py-3">
         <i class="fa fa-sliders fa-6x"></i>
-        <h1 class="display-4 mb-3">Создание нового типа устройств</h1>
-        <h4>Введите название нового типа, а также его возможные модификации</h4>
+        <h1 class="display-4 mb-3">Creating new type of devices</h1>
+        <h4>Enter type name and it's available properties</h4>
     </div>
 
     <form action="/add-type" method="POST" id="add-type-form">
         <div class="row mt-4 mx-5">
             <div class="col-md-6">
-                <label for="typeName">Название типа</label>
+                <label for="typeName">Type name</label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-microchip"></i></div>
@@ -21,13 +21,13 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <label for="typeHash">Расчёт ключа активации</label>
+                <label for="typeHash">License key calculation</label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-key"></i></div>
                     </div>
                     <select required class="custom-select" name="typeHash" id="typeHash">
-                        <option selected value="none">Отсутствует</option>
+                        <option selected value="none">None</option>
                         <option value="crc16">CRC16</option>
                     </select>
                 </div>
@@ -39,16 +39,16 @@
 
         <div class="row mb-5">
             <div class="col-md-6 text-center mt-2">
-                <button type="button" class="btn btn-dark btn-lg" id="addMoreProps">Добавить свойство</button>
+                <button type="button" class="btn btn-dark btn-lg" id="addMoreProps">Add property</button>
             </div>
             <div class="col-md-6 text-center mt-2">
-                <button type="button" class="btn btn-danger btn-lg" id="deleteProp">Удалить свойство</button>
+                <button type="button" class="btn btn-danger btn-lg" id="deleteProp">Delete property</button>
             </div>
         </div>
 
 
         <div class="row mb-5">
-            <button type="submit" class="btn btn-dark btn-lg mx-auto">Создать тип</button>
+            <button type="submit" class="btn btn-dark btn-lg mx-auto">Create type</button>
         </div>
 
     </form>

@@ -1,22 +1,22 @@
 <%- include('partials/header') %>
 
-<a class="btn btn-outline-dark btn-lg m-2" href="/devices" role="button">Назад</a>
+<a class="btn btn-outline-dark btn-lg m-2" href="/devices" role="button">Back to console</a>
 
 <div class="container">
     <div class="jumbotron text-center my-0 py-3">
         <i class="fa fa-sliders fa-6x"></i>
-        <h1 class="display-4 mb-3">Будет отредактирован тип устройтв <%= type.name %></h1>
-        <h4>Отредактируйте свойства типа и их возможные опции</h4>
+        <h1 class="display-4 mb-3">Device type <%= type.name %> will be edited</h1>
+        <h4>Edit device type properties and available options:</h4>
     </div>
 
     <form action="/add-type" method="POST" id="add-type-form">
 
         <ul id="propsList"><% type.props.forEach((prop, propIdx) => { %><li class="card">
-                    <h5 class="card-header">Свойство <%= propIdx + 1 %></h5>
+                    <h5 class="card-header">Property <%= propIdx + 1 %></h5>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6 mx-auto">
-                                <label for="prop-<%= propIdx + 1 %>">Название свойства</label>
+                                <label for="prop-<%= propIdx + 1 %>">Property name</label>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text"><i class="fa fa-cogs"></i></div>
@@ -27,7 +27,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <label>Список возможный опций:</label>
+                                <label>Available options:</label>
                                 <ul id="optList-<%= propIdx + 1 %>"><% prop.options.forEach((opt, optIdx) => { %><li class="input-group input-group-sm mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"
@@ -51,10 +51,10 @@
 
         <div class="row mb-5">
             <div class="col-md-6 text-center mt-2">
-                <button type="button" class="btn btn-dark btn-lg" id="addMoreProps">Прикрепить свойство</button>
+                <button type="button" class="btn btn-dark btn-lg" id="addMoreProps">Add property</button>
             </div>
             <div class="col-md-6 text-center mt-2">
-                <button type="button" class="btn btn-danger btn-lg" id="deleteProp">Удалить свойство</button>
+                <button type="button" class="btn btn-danger btn-lg" id="deleteProp">Delete property</button>
             </div>
         </div>
 
@@ -62,7 +62,7 @@
         <input type="hidden" value="true" name="isEditing">
 
         <div class="row mb-5">
-            <button type="submit" class="btn btn-dark btn-lg">Редактировать тип</button>
+            <button type="submit" class="btn btn-dark btn-lg">Edit type</button>
         </div>
 
     </form>

@@ -1,0 +1,55 @@
+<table id="device-table" class="table table-responsive-lg table-hover table-bordered mt-2"
+       data-toggle="table"
+       data-sort-name="serial"
+       data-sort-order="asc">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col" class="align-middle" data-sortable="true">Type</th>
+        <th scope="col" class="align-middle" data-sortable="true" data-field="serial">Serial<br>№</th>
+        <th scope="col" class="align-middle">Date</th>
+        <th scope="col" class="align-middle">Key</th>
+        <th scope="col" class="align-middle">Company</th>
+        <th scope="col" class="align-middle">Station</th>
+        <th scope="col" class="align-middle">Contact person
+            <br>Email
+            <br>Tel
+        </th>
+        <th scope="col" class="align-middle">Contact person 2
+            <br>Email
+            <br>Tel
+        </th>
+        <th scope="col" class="align-middle">Location</th>
+        <th scope="col" class="align-middle">Comment</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% devices.forEach(device => { %>
+        <tr>
+            <td scope="row" class="align-middle"><%= device.type.name %></td>
+
+            <td scope="row" class="align-middle"><%= device.serial %></td>
+
+            <td class="align-middle"><%= device.year %>-<%= device.month %></td>
+
+            <td class="align-middle"><%= device.hash ? device.hash.toString().padStart(5, '0') : '' %></td>
+
+            <td class="align-middle"><%= device.company %></td>
+
+            <td class="align-middle"><%= device.station %></td>
+
+            <td class="align-middle"><%= device.person %>
+                <br> <%= device.email %>
+                <br> <%= device.phone %></td>
+
+            <td class="align-middle"><%= device.person2 %>
+                <br> <%= device.email2 %>
+                <br> <%= device.phone2 %></td>
+
+            <td class="align-middle"><%= device.city %></td>
+
+            <td class="align-middle"><%= device.comment %></td>
+        </tr>
+    <% }) %>
+    </tbody>
+</table>

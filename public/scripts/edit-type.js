@@ -30,21 +30,21 @@ function addPropHandler() {
     const newPropCard = document.createElement('li');
     newPropCard.setAttribute('class', 'card');
     newPropCard.innerHTML = `
-           <h5 class="card-header">Свойство ${propCount}</h5>
+           <h5 class="card-header">Property ${propCount}</h5>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6 mx-auto">
-                            <label for="prop-${propCount}">Название свойства</label>
+                            <label for="prop-${propCount}">Property name</label>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text"><i class="fa fa-cogs"></i></div>
                                 </div>
-                                <input type="text" required name="prop-${propCount}" class="form-control" placeholder="Модификация ${propCount}"
+                                <input type="text" required name="prop-${propCount}" class="form-control" placeholder="Property ${propCount}"
                                        id="prop-${propCount}">
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label>Список возможный опций:</label>
+                            <label>List of available options:</label>
                             <ul id="optList-${propCount}">
                                 <li class="input-group input-group-sm mb-3">
                                     <div class="input-group-prepend">

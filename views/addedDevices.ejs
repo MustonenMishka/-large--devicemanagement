@@ -5,35 +5,16 @@
 <div class="jumbotron centered">
   <div class="container">
     <i class="fas fa-check fa-6x"></i>
-    <h1 class="display-4">Следующие устройства успешно добавлены:</h1>
+    <h1 class="display-4">Devices were successfully added:</h1>
     <hr>
-    <table class="table table-bordered mt-5"
-           data-toggle="table"
-           data-sort-name="serial"
-           data-sort-order="asc">
 
-      <thead class="thead-dark">
-      <tr>
-        <th scope="col" class="align-middle" data-sortable="true">Тип</th>
-        <th scope="col" class="align-middle" data-sortable="true" data-field="serial">Серийный №</th>
-        <th scope="col" class="align-middle">Ключ</th>
-      </tr>
-      </thead>
+    <%- include('partials/shortenedTable', {devices}) %>
 
-      <tbody>
-      <% devices.forEach((device) => { %>
-        <tr>
-          <td scope="row" class="align-middle"><%= device.type.name %></td>
-          <td scope="row" class="align-middle"><%= device.serial %></td>
-          <td class="align-middle"><%= device.hash %></td>
-        </tr>
-      <% }) %>
-      </tbody>
+    <div class="my-4">
+      <a class="btn btn-light btn-lg" href="/devices" role="button">Back to console</a>
+    </div>
 
-    </table>
-
-    <a class="btn btn-light btn-lg" href="/devices" role="button">Вернуться в личный кабинет</a>
   </div>
 </div>
 
-<%- include('partials/footer') %>
+<%- include('partials/footer')  %>

@@ -2,69 +2,18 @@
 <link href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css" rel="stylesheet">
 <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
 
-    <div class="jumbotron text-center">
-      <div class="container">
-    <i class="fas fa-check fa-6x"></i>
-    <h1 class="display-4">Следующие устройства успешно отредактированы:</h1>
-    <hr>
-      </div>
-          <table id="device-table" class="table table-responsive-lg table-hover table-bordered mt-2"
-                 data-toggle="table"
-                 data-sort-name="serial"
-                 data-sort-order="asc">
-              <thead class="thead-dark">
-              <tr>
-                  <th scope="col" class="align-middle" data-sortable="true">Тип</th>
-                  <th scope="col" class="align-middle" data-sortable="true" data-field="serial">Серийный<br>№</th>
-                  <th scope="col" class="align-middle">Дата</th>
-                  <th scope="col" class="align-middle">Ключ</th>
-                  <th scope="col" class="align-middle">Компания</th>
-                  <th scope="col" class="align-middle">Объект</th>
-                  <th scope="col" class="align-middle">ФИО ответственного
-                      <br>Email
-                      <br>Телефон
-                  </th>
-                  <th scope="col" class="align-middle">ФИО доп. ответственного
-                      <br>Email
-                      <br>Телефон
-                  </th>
-                  <th scope="col" class="align-middle">Местоположение</th>
-                  <th scope="col" class="align-middle">Комментарий</th>
-              </tr>
-              </thead>
+<div class="jumbotron text-center">
+    <div class="container">
+        <i class="fas fa-check fa-6x"></i>
+        <h1 class="display-4">Devices were successfully edited:</h1>
+        <hr>
+    </div>
 
-              <tbody>
-              <% deviceArr.forEach((device) => { %>
-          <tr>
-              <td scope="row" class="align-middle"><%= device.type.name %></td>
+    <%- include('partials/extendedTable', { devices: deviceArr }) %>
 
-              <td scope="row" class="align-middle"><%= device.serial %></td>
-
-              <td class="align-middle"><%= device.year %>-<%= device.month %></td>
-
-              <td class="align-middle"><%= device.hash ? device.hash.toString().padStart(5, '0') : '' %></td>
-
-              <td class="align-middle"><%= device.company %></td>
-
-              <td class="align-middle"><%= device.station %></td>
-
-              <td class="align-middle"><%= device.person %>
-                  <br> <%= device.email %>
-                  <br> <%= device.phone %></td>
-
-              <td class="align-middle"><%= device.person2 %>
-                  <br> <%= device.email2 %>
-                  <br> <%= device.phone2 %></td>
-
-              <td class="align-middle"><%= device.city %></td>
-
-              <td class="align-middle"><%= device.comment %></td>
-          </tr>
-              <% }) %>
-          </tbody>
-          </table>
-
-    <a class="btn btn-light btn-lg" href="/devices" role="button">Вернуться в личный кабинет</a>
+    <div class="my-4">
+        <a class="btn btn-light btn-lg" href="/devices" role="button">Back to console</a>
+    </div>
 </div>
 
 <%- include('partials/footer') %>

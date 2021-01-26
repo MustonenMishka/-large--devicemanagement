@@ -2,8 +2,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand ml-2 text-wrap" id="home-title" href="http://i-mt.net/laurel_home">
-        <img src="media/logo.png" width="40" height="40" class="d-inline-block align-top mr-1" alt="">Микропроцессорные
-        технологии</a>
+        <img src="media/logo.png" width="40" height="40" class="d-inline-block align-top mr-1" alt="">Electrical Facility Company</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -13,10 +12,10 @@
         <% if (isAuthenticated) { %>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/logout">Выйти из аккаунта</a>
+                    <a class="nav-link" href="/logout">Logout</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/devices">Войти в личный кабинет</a>
+                    <a class="nav-link" href="/devices">Enter console</a>
                 </li>
             </ul>
         <% } else { %>
@@ -24,7 +23,7 @@
                 <input class="form-control mr-sm-2" type="text" name="username" placeholder="Логин" aria-label="Search">
                 <input class="form-control mr-sm-2" type="password" name="password" placeholder="Пароль"
                        aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Войти</button>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
             </form>
         <% } %>
     </div>
@@ -32,7 +31,7 @@
 <div class="container">
     <div class="row text-center my-4">
         <div class="col-4">
-            <p class="h4 count"><%= totalNum %><br>УСТРОЙСТВ
+            <p class="h4 count"><%= totalNum %><br>DEVICES
                 <a data-toggle="collapse" href="#collapse-filter" role="button" aria-expanded="false" aria-controls="collapse-filter">
                     <i class="fa fa-filter" aria-hidden="true"></i>
                 </a>
@@ -47,12 +46,12 @@
     <form action="/" method="POST">
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between flex-wrap">
-                <span class="h6">Выбор отображаемых типов устройств на карте</span>
+                <span class="h6">Filter device types shown on map</span>
                 <div>
-                    <button class="btn btn-outline-success mx-1 my-1" type="submit">Применить</button>
-                    <button class="btn btn-outline-secondary mx-1 my-1" type="button" id="all-checkbox-toggle">Выделить/Снять всё</button>
+                    <button class="btn btn-outline-success mx-1 my-1" type="submit">Apply</button>
+                    <button class="btn btn-outline-secondary mx-1 my-1" type="button" id="all-checkbox-toggle">Check/uncheck all</button>
                     <a class="btn btn-danger mx-1 my-1" data-toggle="collapse" href="#collapse-filter"
-                       role="button" aria-expanded="false" aria-controls="collapse-filter">Отмена</a>
+                       role="button" aria-expanded="false" aria-controls="collapse-filter">Cancel</a>
                 </div>
             </div>
             <div class="card-body py-1 d-flex flex-wrap align-items-start">
@@ -91,7 +90,7 @@
     <div id="map" class="col mx-auto"></div>
 </div>
 
-<script src="https://api-maps.yandex.ru/2.1/?lang=ru-RU&amp;apikey=ecf1da0d-157d-4bc1-b947-ba8cc775e35a"
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru-RU&amp;apikey=%YANDEX_API_KEY%"
         type="text/javascript"></script>
 <script src="scripts/home.js" defer></script>
 <%- include('partials/footer') %>

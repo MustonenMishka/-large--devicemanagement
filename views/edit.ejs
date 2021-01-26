@@ -1,37 +1,21 @@
 <%- include('partials/header') %>
 
-<a class="btn btn-outline-dark btn-lg m-2" href="/devices" role="button">Назад</a>
+<a class="btn btn-outline-dark btn-lg m-2" href="/devices" role="button">Back to console</a>
 <div class="container">
 <div class="jumbotron text-center">
         <i class="fas fa-edit fa-6x"></i>
-        <h1 class="display-4">Следующие устройства <%= deviceArr.length > 1 ? deviceArr[0].station : null %> будут отредактированы:</h1>
+        <h1 class="display-4">Devices of <%= deviceArr.length > 1 ? deviceArr[0].station : null %> will be edited:</h1>
         <hr>
-        <table class="table table-bordered mt-5">
 
-            <thead class="thead-dark">
-            <tr>
-                <th scope="col" class="align-middle">Серийный №</th>
-                <th scope="col" class="align-middle">Дата</th>
-            </tr>
-            </thead>
+    <%- include('partials/shortenedTable', { devices: deviceArr }) %>
 
-            <tbody>
-            <% deviceArr.forEach((device) => { %>
-            <tr class="text-center">
-                <td scope="row" class="align-middle"><%= device.serial %></td>
-                <td class="align-middle"><%= device.year %>-<%= device.month %></td>
-            </tr>
-            <% }) %>
-            </tbody>
-
-        </table>
     </div>
 
     <form action="/edit" method="POST" id="edit-device-form">
 
         <div class="form-row">
             <div class="col-md-4">
-                <label for="person">ФИО ответственного</label>
+                <label for="person">Contact person</label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-user"></i></div>
@@ -40,7 +24,7 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <label for="phone">Телефон ответственного</label>
+                <label for="phone">Tel</label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-phone"></i></div>
@@ -49,7 +33,7 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <label for="email">E-mail ответственного</label>
+                <label for="email">E-mail</label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-envelope"></i></div>
@@ -60,7 +44,7 @@
         </div>
         <div class="form-row">
             <div class="col-md-4">
-                <label for="person2">ФИО доп. ответственного</label>
+                <label for="person2">Contact person 2</label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-user"></i></div>
@@ -69,7 +53,7 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <label for="phone2">Телефон доп. ответственного</label>
+                <label for="phone2">Tel 2</label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-phone"></i></div>
@@ -78,7 +62,7 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <label for="email2">E-mail доп. ответственного</label>
+                <label for="email2">E-mail 2</label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-envelope"></i></div>
@@ -89,7 +73,7 @@
         </div>
         <div class="form-row">
             <div class="col">
-                <label for="comment">Комментарий:</label>
+                <label for="comment">Comment:</label>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-comment"></i></div>
@@ -107,7 +91,7 @@
         <% } %>
 
         <div class="row mb-5">
-                <button type="submit" class="btn btn-dark btn-lg m-2">Отредактировать</button>
+                <button type="submit" class="btn btn-dark btn-lg m-2">Edit</button>
         </div>
 
     </form>
