@@ -133,6 +133,7 @@ async function getCoordsFromAddress(address) {
 
 
 // ================= DEVICE-TYPES OPTIONS LOGIC =================
+
 document.getElementById('typeSelector-1').innerHTML = `
     <label for="typeName-1">Device type</label>
         <select required class="custom-select" id="typeName-1" name="typeName-1">
@@ -161,7 +162,7 @@ function typeSelectHandler(deviceIdx) {
     this.nextSibling.innerHTML = ''
     $.ajax({
         type: "GET",
-        url: `/type-suggest/${this.value}`
+        url: `/type-suggest/${encodeURIComponent(this.value)}`
     }).done(([props, hashCalc]) => {
         this.nextSibling.innerHTML = `<input type="hidden" name="hashCalc-${deviceIdx}" value="${hashCalc}">`;
         if (props.length === 0) {

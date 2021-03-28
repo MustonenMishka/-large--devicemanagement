@@ -10,8 +10,8 @@ router.get("/:option", (req, res) => { // option can be "serial-11111" (edit one
     if (queryParams[0] === 'serial') {  // parsing url params, what user wants to edit? single device or company devices?
         searchCondition.serial = queryParams[1]
     } else {
-        searchCondition.station = queryParams[1];
-        searchCondition.company = queryParams[2];
+        searchCondition.station = decodeURIComponent(req.query.station);
+        searchCondition.company = decodeURIComponent(req.query.company);
         isStation = true
     }
 

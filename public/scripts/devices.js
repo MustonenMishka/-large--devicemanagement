@@ -26,14 +26,15 @@ function init() {
 function addCompanySuggest(station) {
     $.ajax({
         type: "GET",
-        url: `/company-suggest/${station}`
+        url: `/company-suggest/${encodeURIComponent(station)}`
     }).done (companies => {
         fillCompanySelector(companies) // наполняем селектор опциями - компаниями, найденными в базе
     });
 }
 function fillCompanySelector(optionsArr) {
     optionsArr.forEach(option => {
-        companySelectEl.innerHTML += `<option value="${option}">${option}</option>`
+        let nonQuotedOption = option.replace(/"/g, "&quot;");
+        companySelectEl.innerHTML += `<option value="${nonQuotedOption}">${option}</option>`
     });
     companySelectEl.firstElementChild.setAttribute('selected', true);
 }

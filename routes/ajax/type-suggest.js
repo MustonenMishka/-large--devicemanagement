@@ -4,7 +4,7 @@ const router = express.Router();
 const Type = require('../../models/Type');
 
 router.get("/:typeName", (req, res) => {
-    Type.findOne({name: req.params.typeName}, (err, type) => {
+    Type.findOne({name: decodeURIComponent(req.params.typeName)}, (err, type) => {
             if (err) {
                 console.log(err)
             } else {

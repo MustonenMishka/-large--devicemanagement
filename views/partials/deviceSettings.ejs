@@ -4,15 +4,12 @@
 </a>
 
 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    <a class="dropdown-item" href="/add-to-station/<%= device.station %>-<%= device.company %>">Добавить
-        ещё устройства к объекту</a>
-    <a class="dropdown-item" href="/edit/serial-<%= device.serial %>">Редактировать устройство</a>
-    <a class="dropdown-item" href="/edit/station-<%= device.station %>-<%= device.company %>">Редактировать
-        все устройства
-        объекта</a>
+    <a class="dropdown-item" href="/add-to-station/?<%= `station=${encodeURIComponent(device.station)}&company=${encodeURIComponent(device.company)}` %>">Add more devices to station</a>
+    <a class="dropdown-item" href="/edit/serial-<%= device.serial %>">Edit device</a>
+    <a class="dropdown-item" href="/edit/station-?<%= `station=${encodeURIComponent(device.station)}&company=${encodeURIComponent(device.company)}` %>">Edit station</a>
     <% if (lead || admin) { %>
-        <a class="dropdown-item" href="/delete-device/<%= device.serial %>">Удалить устройство</a>
+        <a class="dropdown-item" href="/delete-device/<%= device.serial %>">Delete device</a>
     <% } %>
-    <a class="dropdown-item">Информация о добавлении: <br> <%= device.whoadded %>
+    <a class="dropdown-item">By whom and when added: <br> <%= device.whoadded %>
         , <%= device.whenadded %> </a>
 </div>

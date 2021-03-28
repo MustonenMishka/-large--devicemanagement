@@ -11,11 +11,10 @@ router.post("/", (req, res) => {                  // Add to station (control pan
     renderSubmitForStation(req, res, searchCondition)
 });
 
-router.get("/:option", (req, res) => {                  // Add to station (device options variant)
-    const queryParams = req.params.option.split('-');
+router.get("/", (req, res) => {                  // Add to station (device options variant)
     const searchCondition = {
-        station: queryParams[0],
-        company: queryParams[1]
+        station: decodeURIComponent(req.query.station),
+        company: decodeURIComponent(req.query.company)
     };
     renderSubmitForStation(req, res, searchCondition)
 });

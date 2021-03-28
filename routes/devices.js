@@ -4,9 +4,7 @@ const router = express.Router();
 const Device = require('../models/Device');
 const Type = require('../models/Type');
 
-router.get("/", (req, res) => {
-    renderPageForBase(req, res, 'Engine')
-});
+router.get("/", renderPageForBase);
 
 router.get("/:typeBase", renderPageForBase);
 
@@ -20,7 +18,7 @@ async function renderPageForBase(req, res, base) {
     if (req.isAuthenticated()) {
         const admin = req.user.admin;
         const lead = req.user.lead;
-        const currBaseName = req.params.typeBase || base;
+        const currBaseName = req.params.typeBase ? decodeURIComponent(req.params.typeBase) : 'Engine';
         let currBase;
         let typeBases;
         await Type.find({}, (err, types) => {
