@@ -12,8 +12,7 @@ const User = require('./models/User'); //Connecting User schema for passport aut
 // app init
 const app = express();
 
-// linking files, connecting ejs engine for SSR, connecting body-parser to read forms
-app.use(express.static(__dirname + '/public'));
+// linking files, connecting ejs engine for SSR, connecting body-parser to read forms, creating static filepath
 app.use('/static', express.static(__dirname + "/public"));
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));

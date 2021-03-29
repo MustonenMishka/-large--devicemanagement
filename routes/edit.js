@@ -3,12 +3,11 @@ const router = express.Router();
 
 const Device = require('../models/Device');
 
-router.get("/:option", (req, res) => { // option can be "serial-11111" (edit one device contact data) or "station-StationName-CompanyName" (edit station contact data for many devices)
-    const queryParams = req.params.option.split('-');
+router.get("/", (req, res) => { // option can be "serial-11111" (edit one device contact data) or "station-StationName-CompanyName" (edit station contact data for many devices)
     const searchCondition = {};
     let isStation = false;
-    if (queryParams[0] === 'serial') {  // parsing url params, what user wants to edit? single device or company devices?
-        searchCondition.serial = queryParams[1]
+    if (req.query.mode === 'serial') {  // parsing url params, what user wants to edit? single device or company devices?
+        searchCondition.serial = req.query.number;
     } else {
         searchCondition.station = decodeURIComponent(req.query.station);
         searchCondition.company = decodeURIComponent(req.query.company);

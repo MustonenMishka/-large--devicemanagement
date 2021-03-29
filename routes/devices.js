@@ -6,19 +6,17 @@ const Type = require('../models/Type');
 
 router.get("/", renderPageForBase);
 
-router.get("/:typeBase", renderPageForBase);
-
 module.exports = router;
 
 
 //-----------UTILS--------------
 
 
-async function renderPageForBase(req, res, base) {
+async function renderPageForBase(req, res) {
     if (req.isAuthenticated()) {
         const admin = req.user.admin;
         const lead = req.user.lead;
-        const currBaseName = req.params.typeBase ? decodeURIComponent(req.params.typeBase) : 'Engine';
+        const currBaseName = req.query.typeBase ? decodeURIComponent(req.query.typeBase) : 'Engine';
         let currBase;
         let typeBases;
         await Type.find({}, (err, types) => {

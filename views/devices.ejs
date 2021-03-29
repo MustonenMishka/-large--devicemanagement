@@ -35,7 +35,7 @@
         </button>
         <div class="dropdown-menu">
             <% typeBases.forEach((base) => { %>
-                <a class="dropdown-item" href="/devices/<%= encodeURIComponent(base.name) %>"><%= base.name %></a>
+                <a class="dropdown-item" href="/devices/?typeBase=<%= encodeURIComponent(base.name) %>"><%= base.name %></a>
             <% }) %>
         </div>
     </div>
@@ -117,7 +117,7 @@
 
 <script src="https://api-maps.yandex.ru/2.1/?lang=ru-RU&amp;apikey=%YANDEX_API_KEY%"
         type="text/javascript"></script>
-<script src="scripts/devices.js" type="text/javascript" defer></script>
-<script src="scripts/provider.js" type="text/javascript" defer></script>
+<script src="/static/scripts/devices.js" type="text/javascript" defer></script>
+<script src="/static/scripts/provider.js" type="text/javascript" defer></script>
 
 <%- include('partials/footer') %>
